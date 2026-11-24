@@ -3177,7 +3177,7 @@ class TestMetadataRepository:
             pretend.call(fake_targets, Targets.type)
         ]
         assert test_repo._update_snapshot.calls == [
-            pretend.call(bump_all=True)
+            pretend.call(bump_all=True, only_target=True)
         ]
         assert test_repo._update_timestamp.calls == [pretend.call("version")]
 
@@ -3201,7 +3201,7 @@ class TestMetadataRepository:
             pretend.call(fake_targets, Targets.type)
         ]
         assert test_repo._update_snapshot.calls == [
-            pretend.call(target_roles=["foo"])
+            pretend.call(target_roles=["foo"], only_target=True)
         ]
         assert test_repo._update_timestamp.calls == [pretend.call("version")]
 
@@ -3231,7 +3231,7 @@ class TestMetadataRepository:
             pretend.call(fake_targets, Targets.type)
         ]
         assert test_repo._update_snapshot.calls == [
-            pretend.call(target_roles=["foo", "bar"])
+            pretend.call(target_roles=["foo", "bar"], only_target=True)
         ]
         assert test_repo._update_timestamp.calls == [pretend.call("version")]
 
@@ -3246,7 +3246,7 @@ class TestMetadataRepository:
         result = test_repo._run_force_online_metadata_update(["bins"])
         assert result == [Snapshot.type, Timestamp.type, "bins"]
         assert test_repo._update_snapshot.calls == [
-            pretend.call(bump_all=True)
+            pretend.call(bump_all=True, only_target=False)
         ]
         assert test_repo._update_timestamp.calls == [pretend.call("version")]
 
@@ -3268,7 +3268,7 @@ class TestMetadataRepository:
             pretend.call(fake_targets, Targets.type)
         ]
         assert test_repo._update_snapshot.calls == [
-            pretend.call(target_roles=[])
+            pretend.call(target_roles=[], only_target=True)
         ]
         assert test_repo._update_timestamp.calls == [pretend.call("version")]
 
